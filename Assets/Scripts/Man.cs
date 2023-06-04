@@ -23,6 +23,5 @@ public class Man : MonoBehaviour
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
-
     }
 }
