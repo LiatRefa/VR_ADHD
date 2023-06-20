@@ -4,61 +4,66 @@ using UnityEngine;
 
 public class ExpManager : MonoBehaviour
 {
-    [SerializeField] private GameObject pinkButterfly;
-    [SerializeField] private GameObject man;
-    [SerializeField] private GameObject birdNear;
-    [SerializeField] private GameObject treeNear;
+    [SerializeField] private GameObject butterfly;
+    [SerializeField] private GameObject manCloseS;
+    [SerializeField] private GameObject manClose;
+    [SerializeField] private GameObject manFarS;
+    [SerializeField] private GameObject manFar;
+    [SerializeField] private GameObject birdCloseS;
+    [SerializeField] private GameObject birdClose;
+    [SerializeField] private GameObject birdFarS;
+    [SerializeField] private GameObject birdFar;
+    [SerializeField] private GameObject treeCloseS;
+    [SerializeField] private GameObject treeClose;
+    [SerializeField] private GameObject treeFarS;
     [SerializeField] private GameObject treeFar;
-    [SerializeField] private GameObject birdBlue;
+    List<GameObject> DistList;
 
-    // Start is called before the first frame update
     void Start()
+{
+    DistList = new List<GameObject>();
+    DistList.Add(manCloseS);
+    DistList.Add(treeCloseS);
+    DistList.Add(birdCloseS);
+    DistList.Add(manClose);
+    DistList.Add(treeFarS);
+    DistList.Add(birdClose);
+    DistList.Add(manFar);
+    DistList.Add(treeClose);
+    DistList.Add(birdFarS);
+    DistList.Add(manFarS);
+    DistList.Add(birdFar);
+    DistList.Add(treeFar);
+
+	StartCoroutine(ActivateExp());
+	StartCoroutine(ActivateDistractor());
+	
+	
+}
+    // Start is called before the first frame update
+    void Update()
     {
-        StartCoroutine(ButterflyDistractor()); // 10
-        StartCoroutine(NearBirdDistractor()); // 20
-        StartCoroutine(NearTreeDistractor()); // 30
-        StartCoroutine(ManDistractor()); // 40
-        StartCoroutine(FarTreeDistractor()); // 50
-        StartCoroutine(BlueBirdDistractor()); // 60
+
+
     }
 
 
-    IEnumerator ButterflyDistractor()
+IEnumerator ActivateExp()
+{
+	yield return new WaitForSeconds(15f);
+	butterfly.SetActive(true);
+}
+
+    IEnumerator ActivateDistractor()
     {
-        yield return new WaitForSeconds(10f);
-        pinkButterfly.SetActive(true);
+	foreach (GameObject obj in DistList)
+	{
+        yield return new WaitForSeconds(15f);
+        obj.SetActive(true);
+}
     }
 
-    IEnumerator NearBirdDistractor()
-    {
-        yield return new WaitForSeconds(20f);
-        pinkButterfly.SetActive(false);
-        treeNear.SetActive(true);
-    }
-    
-    IEnumerator NearTreeDistractor()
-    {
-        yield return new WaitForSeconds(30f);
-        birdNear.SetActive(true);
-    }
-    
-    IEnumerator FarTreeDistractor()
-    {
-        yield return new WaitForSeconds(40f);
-        treeFar.SetActive(true);
-    }
-    
-    IEnumerator ManDistractor()
-    {
-        yield return new WaitForSeconds(50f);
-        man.SetActive(true);
-    }
-    
-    IEnumerator BlueBirdDistractor()
-    {
-        yield return new WaitForSeconds(60f);
-        birdBlue.SetActive(true);
-    }
+
 
 
 
